@@ -22,7 +22,10 @@ def active(request, url):
 @register.simple_tag
 def pygments(filename):
     fqfn = os.path.abspath(os.path.join(settings.PROJECT_DIR, filename))
-    with file(fqfn) as f:
+    #with file(fqfn) as f: #file() is removed in python 3.4 use open()
+    #print("[error] ## failed to add %s" % fqfn)
+    theFile = open(fqfn, 'r')
+    with theFile as f:
         readlines = f.readlines()
     startfrom = 0
     prevline = True
